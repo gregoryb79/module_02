@@ -9,7 +9,7 @@ if (isNaN(NumberOfNumbers)){
 let SummOfNumbers = 0;
 let CurrNumber = 0;
 
-for (i = 0; i < NumberOfNumbers; i++) {
+for (let i = 0; i < NumberOfNumbers; i++) {
     CurrNumber = Number(prompt("Enter number #"+ (i+1)));
     if (isNaN(CurrNumber)){
         alert("ERROR - this is not a number!");

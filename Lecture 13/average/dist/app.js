@@ -6,7 +6,7 @@ if (isNaN(NumberOfNumbers)) {
 }
 var SummOfNumbers = 0;
 var CurrNumber = 0;
-for (i = 0; i < NumberOfNumbers; i++) {
+for (var i = 0; i < NumberOfNumbers; i++) {
     CurrNumber = Number(prompt("Enter number #" + (i + 1)));
     if (isNaN(CurrNumber)) {
         alert("ERROR - this is not a number!");
