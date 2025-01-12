@@ -1,12 +1,21 @@
 alert("Enter numbers, I'll show you the average");
 var SummOfNumbers = 0;
 var CurrNumber = 0;
-for (var i = 0; i < NumberOfNumbers; i++) {
-    CurrNumber = Number(prompt("Enter number #" + (i + 1)));
-    if (isNaN(CurrNumber)) {
-        alert("ERROR - this is not a number!");
-        throw "ERROR - this is not a number!";
+var NumberOfNumbers = 0;
+var CurrNumberResponce = " ";
+while (CurrNumberResponce !== null) {
+    CurrNumberResponce = prompt("Enter number #" + (NumberOfNumbers + 1) + ". Press 'Cancel' to stop.");
+    if (CurrNumberResponce !== null) {
+        CurrNumber = Number(CurrNumberResponce);
+        //alert(CurrNumberResponce + " " + CurrNumber);
+        if (isNaN(CurrNumber)) {
+            alert("ERROR - this is not a number!");
+            //throw "ERROR - this is not a number!";
+        }
+        else {
+            SummOfNumbers = SummOfNumbers + CurrNumber;
+            NumberOfNumbers++;
+        }
     }
-    SummOfNumbers = SummOfNumbers + CurrNumber;
 }
 alert("The average is: " + (SummOfNumbers / NumberOfNumbers));
