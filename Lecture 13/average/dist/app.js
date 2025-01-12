@@ -7,10 +7,8 @@ while (CurrNumberResponce !== null) {
     CurrNumberResponce = prompt("Enter number #" + (NumberOfNumbers + 1) + ". Press 'Cancel' to stop.");
     if (CurrNumberResponce !== null) {
         CurrNumber = Number(CurrNumberResponce);
-        //alert(CurrNumberResponce + " " + CurrNumber);
         if (isNaN(CurrNumber)) {
             alert("ERROR - this is not a number!");
-            //throw "ERROR - this is not a number!";
         }
         else {
             SummOfNumbers = SummOfNumbers + CurrNumber;
