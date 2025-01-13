@@ -1,18 +1,38 @@
-alert("This is a Number Guessing Game");
-//Difficulty = Number(prompt("Pick your difficulty 1 - Low, 2 - Medium, 3 - Hard."));
-var Difficulty = 0;
-var DifficultyAnswer = "";
-while (!((Difficulty === 1) || (Difficulty === 2) || (Difficulty === 3))) {
-    DifficultyAnswer = prompt("Pick your difficulty 1 - Low, 2 - Medium, 3 - Hard.");
-    if (DifficultyAnswer === null) {
+function getAnswer(messageToUser) {
+    var userAnswer = prompt(messageToUser);
+    if (userAnswer === null) {
         alert("Looks like you don't want to play. Good Day!");
         throw "The game was canceled by the player.";
     }
-    Difficulty = Number(DifficultyAnswer);
-    if (!((Difficulty === 1) || (Difficulty === 2) || (Difficulty === 3))) {
-        alert("ERROR - wrong input, it must be 1 or 2 or 3!");
-    }
+    return userAnswer;
 }
+function getDifficulty() {
+    var Difficulty = 0;
+    var DifficultyAnswer = "";
+    while ((Difficulty !== 1) && (Difficulty !== 2) && (Difficulty !== 3)) {
+        DifficultyAnswer = getAnswer("Pick your difficulty 1 - Low, 2 - Medium, 3 - Hard.");
+        Difficulty = Number(DifficultyAnswer);
+        if ((Difficulty !== 1) && (Difficulty !== 2) && (Difficulty !== 3)) {
+            alert("ERROR - wrong input, it must be 1 or 2 or 3!");
+        }
+    }
+    return Difficulty;
+}
+function getGameMode() {
+    var GameMode = 0;
+    var GameModeAnswer = "";
+    while (!((GameMode === 1) || (GameMode === 2))) {
+        GameModeAnswer = getAnswer("Pick your game mode 1 - Classic (above/below), 2 - Hot/Cold.");
+        GameMode = Number(GameModeAnswer);
+        if (!((GameMode === 1) || (GameMode === 2))) {
+            alert("ERROR - wrong input, it must be 1 or 2!");
+        }
+    }
+    return GameMode;
+}
+alert("This is a Number Guessing Game");
+var Difficulty = getDifficulty();
+var GameMode = getGameMode();
 //Sets the upper limit and number of guesse according to the difficulty
 var HighNum = 10;
 var NumberOfGuesses = 3;
@@ -23,20 +43,6 @@ if (Difficulty === 3) {
 else if (Difficulty === 2) {
     HighNum = 50;
     NumberOfGuesses = 5;
-}
-//GameMode = Number(prompt("Pick your game mode 1 - Classic (above/below), 2 - Hot/Cold."));
-var GameMode = 0;
-var GameModeAnswer = "";
-while (!((GameMode === 1) || (GameMode === 2))) {
-    GameModeAnswer = prompt("Pick your game mode 1 - Classic (above/below), 2 - Hot/Cold.");
-    if (GameModeAnswer === null) {
-        alert("Looks like you don't want to play. Good Day!");
-        throw "The game was canceled by the player.";
-    }
-    GameMode = Number(GameModeAnswer);
-    if (!((GameMode === 1) || (GameMode === 2))) {
-        alert("ERROR - wrong input, it must be 1 or 2!");
-    }
 }
 //Generates a random integer number between 1 and HighNum (inclusive)
 var MyNumber = Math.floor(Math.random() * HighNum) + 1;
@@ -49,17 +55,13 @@ while ((AttemptsLeft > 0) && (UserGuess !== MyNumber)) {
     UserGuess = NaN;
     while (isNaN(UserGuess) || (UserGuess < 1) || (UserGuess > HighNum)) {
         if (NumberOfGuesses === 1) {
-            UserGuessAnswer = prompt("Enter your only guess...");
+            UserGuessAnswer = getAnswer("Enter your only guess...");
         }
         else if (AttemptsLeft > 1) {
-            UserGuessAnswer = prompt("Enter your guess, you have " + AttemptsLeft + " guesses left");
+            UserGuessAnswer = getAnswer("Enter your guess, you have " + AttemptsLeft + " guesses left");
         }
         else {
-            UserGuessAnswer = prompt("Enter your guess, this is your last attempt.");
-        }
-        if (UserGuessAnswer === null) {
-            alert("Looks like you don't want to play. Good Day!");
-            throw "The game was canceled by the player.";
+            UserGuessAnswer = getAnswer("Enter your guess, this is your last attempt.");
         }
         UserGuess = Number(UserGuessAnswer);
         if (isNaN(UserGuess)) {
