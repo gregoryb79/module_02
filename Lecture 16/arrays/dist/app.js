@@ -29,12 +29,14 @@ function stringsReader() {
     var index = Number(prompt("enter number"));
     alert("String number " + index + " is " + strings[index - 1] + ".");
 }
-function getArray() {
+function getArray(maxLength) {
     var numbers = [];
-    var userInput = prompt("enter number");
-    while (userInput !== null) {
-        userInput = prompt("enter number");
-        numbers[numbers.length] = Number(userInput);
+    for (var i = 0; i < maxLength; i++) {
+        var userInput = prompt("enter number");
+        if (userInput === null) {
+            break;
+        }
+        numbers[i] = Number(userInput);
     }
     return numbers;
 }
@@ -52,10 +54,37 @@ function bubbleSort(array) {
 }
 function sortedArray() {
     var numbers = [];
-    var userInput = prompt("enter number");
-    numbers = getArray();
+    numbers = getArray(10);
     numbers = bubbleSort(numbers);
     alert(numbers);
 }
+function getMedian() {
+    var numbers = [];
+    var arraySize = Number(prompt("Enter the number of numbers"));
+    numbers = getArray(arraySize);
+    numbers = bubbleSort(numbers);
+    if ((arraySize % 2) === 0) {
+        var median = (numbers[arraySize / 2 - 1] + numbers[arraySize / 2]) / 2;
+    }
+    else {
+        var median = numbers[(arraySize - 1) / 2];
+    }
+    alert("The median of " + numbers + " is:\n" + median + ".");
+}
+function getTwoSamllest(array) {
+    array = bubbleSort(array);
+    var twoSmallest = [];
+    twoSmallest[0] = array[0];
+    twoSmallest[1] = array[1];
+    return twoSmallest;
+}
+function testGetTwoSmallest() {
+    alert(getTwoSamllest([55, 32, 98, 5, 33, 696, 22, 1])); //1 and 5 expected
+}
 //stringsReader();
-sortedArray();
+//sortedArray();
+//getMedian();
+// function testGetTwoSmallest() {
+//     alert(getTwoSamllest([55 32 98 5 33 696 22 1]));//1 and 5 expected
+// }
+// testGetTwoSmallest();
