@@ -76,31 +76,33 @@ function salaryStatistics (employeesList : employee [], wantedDepartment : strin
 
 }
 
-type employee = {
-    name : string,
-    age : number,
-    department : string,
-    salary : number
-}
-
-const numberOfEmployees = 5;
-let employeesList : employee [] = [];
-
-for (let i = 0; i < numberOfEmployees; i++){
-    employeesList.push(getEmployeeData());
-}
-
-salaryStatistics(employeesList,"all");
-
-// for (let i = 0; i < employeesList.length; i++){
-//     alert(`The data of ${i+1} employee is:\n
-//            Name: ${employeesList[i].name}\n
-//            Age: ${employeesList[i].age}\n
-//            Department: ${employeesList[i].department}\n
-//            Salary: ${employeesList[i].salary}\n
-//             `);
-        
+// type employee = {
+//     name : string,
+//     age : number,
+//     department : string,
+//     salary : number
 // }
+
+// const numberOfEmployees = 5;
+// let employeesList : employee [] = [];
+
+// for (let i = 0; i < numberOfEmployees; i++){
+//     employeesList.push(getEmployeeData());
+// }
+
+// salaryStatistics(employeesList,"all");
+
+type Pet = { 
+    name: string, 
+    species: string, 
+    age: number,     
+};
+
+const myPet: Pet = { name: "Rocky", species: "Pitbull", age: 3 };
+//const myPetStr = myPet.toString();
+const myPetStr = `name:${myPet.name}, species:${myPet.species}, age:${myPet.age}`;
+
+alert(myPetStr);
 
 
 

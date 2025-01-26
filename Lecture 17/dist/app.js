@@ -54,17 +54,7 @@ function salaryStatistics(employeesList, wantedDepartment) {
     var medSalary = getMedian(salary);
     alert("The salary statistics in " + wantedDepartment + " is:\n\n            Maximal Salary: " + maxSalary + "\n\n            Minimal Salary: " + minSalary + "\n\n            Average Salary: " + avgSalary + "\n\n            Median Salary: " + medSalary);
 }
-var numberOfEmployees = 5;
-var employeesList = [];
-for (var i = 0; i < numberOfEmployees; i++) {
-    employeesList.push(getEmployeeData());
-}
-salaryStatistics(employeesList, "all");
-// for (let i = 0; i < employeesList.length; i++){
-//     alert(`The data of ${i+1} employee is:\n
-//            Name: ${employeesList[i].name}\n
-//            Age: ${employeesList[i].age}\n
-//            Department: ${employeesList[i].department}\n
-//            Salary: ${employeesList[i].salary}\n
-//             `);
-// }
+var myPet = { name: "Rocky", species: "Pitbull", age: 3 };
+//const myPetStr = myPet.toString();
+var myPetStr = "name:" + myPet.name + ", species:" + myPet.species + ", age:" + myPet.age;
+alert(myPetStr);
