@@ -3,11 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>  
+    <title>Calculator</title> 
+    <link rel="stylesheet" href="dist/styles.css"> 
 </head>
 <body>
-    <h2>Basic Calculator</h2>
-    <p>Enter variable, operator, and a variable to get a result.</p>
+    <h2>Calculator</h2>
+    <main class="u_border_16px">
+        <span class="outputField" id="calcOutput">0</span>     
+            
+        <ul class="calcTopRow">
+            <li class="u_fullSize">
+                <button class="calcButton">+</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">-</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">/</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">x</button>
+            </li>
+        </ul>
+        <ul class="calc2ndRow">
+            <li class="u_fullSize">
+                <button class="calcButton">7</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">8</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">9</button>
+            </li>
+        </ul>
+        <ul class="calc3rdRow">
+            <li class="u_fullSize">
+                <button class="calcButton">4</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">5</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">6</button>
+            </li>
+        </ul>
+        <ul class="calc4thRow">
+            <li class="u_fullSize">
+                <button class="calcButton">1</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">2</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">3</button>
+            </li>
+        </ul>
+        <ul class="calcBottomRow">
+            <li class="u_fullSize u_flex2">
+                <button class="calcButton">0</button>
+            </li>
+            <li class="u_fullSize">
+                <button class="calcButton">.</button>
+            </li>
+        </ul>
+        <ul class="calcSideColumn">   
+            <li class="u_fullSize">
+                <button class="calcButton">AC</button>
+            </li>
+            
+            <li class="u_fullSize">
+                <button class="calcButton">=</button>
+            </li>                                  
+        </ul>
+    </main>
+    
     
     <script src="dist/app.js"></script>
    

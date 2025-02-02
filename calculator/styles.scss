@@ -1,0 +1,149 @@
+:root{
+    --gridGap: 2px;
+    --calcHeight: 30rem;
+    --calcWidth: 20rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;   
+}
+
+// COMPOSITION
+main{
+   height: var(--calcHeight,30rem); 
+   width: var(--calcWidth,20rem);   
+   margin: auto;
+   border: 1px solid gray;   
+   display: grid; 
+   grid-template-rows: repeat(6, 1fr);        /* 7 equal rows */
+   grid-template-columns: repeat(4, 1fr);     /* 4 equal columns */
+   gap: var(--gridGap, 2px);
+
+   align-items: stretch;    // Stretch items to fill grid cells vertically
+   justify-items: stretch;  // Stretch items horizontally
+   padding: 0.5rem;
+}
+
+// UTILITIES
+
+.u_border_16px{
+    border-radius: 1rem;
+}
+
+.u_text_32{
+    font-size: 2rem;
+}
+
+.u_fullSize{
+    display: flex;
+    flex: 1;    
+    height: 100%;
+    width: 100%;
+}
+
+.u_flex2{
+    flex: 2;
+}
+
+//BLOCK
+
+.calcTopRow{
+    margin: 0;
+    display: flex;
+    grid-row: 2/3;                       // Place on row 2
+    grid-column: 1 / 5;                // Span all 4 columns
+   
+    display: flex;                  
+    align-items: center;    
+    gap: var(--gridGap,2px);        
+    //justify-content: stretch;     
+
+}
+
+.calc2ndRow{
+    display: flex;
+    grid-row: 3/4;
+    grid-column: 1 / 4; 
+    //grid-template-columns: repeat(3, 1fr);
+    align-items: center;            
+    justify-content: space-around;  
+    gap: var(--gridGap,2px);
+}
+
+.calc3rdRow{
+    display: flex;
+    grid-row: 4/5;
+    grid-column: 1 / 4; 
+    align-items: center;            
+    justify-content: space-around;  
+    gap: var(--gridGap,2px);
+}
+
+.calc4thRow{
+    display: flex;
+    grid-row: 5/6;
+    grid-column: 1 / 4; 
+    align-items: center;            
+    justify-content: space-around;
+    gap: var(--gridGap,2px);  
+}
+
+.calcSideColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;        
+    justify-content: space-around;
+    gap: var(--gridGap,2px);
+
+    grid-column: 4/5;
+    grid-row: 3/-1;    
+}
+
+.calcBottomRow{
+    display: flex;
+    grid-row: 6/7;
+    grid-column: 1 / 4; 
+    align-items: center;            
+    justify-content: space-around; 
+    gap: var(--gridGap,2px); 
+}
+
+.calcButton{
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 1px solid darkgrey;  
+    background: seashell; 
+    border-radius: 0.5rem; 
+    font-size:  2rem;     
+}
+
+.outputField{
+    display: flex;                  
+    align-items: center;            
+    justify-content: flex-end;      
+    grid-row: 1 / 2;                
+    grid-column: 1 / -1;            
+    width: 100%;                    
+    height: 100%;                   
+    
+       
+    overflow: hidden;
+    flex-wrap: wrap-reverse; 
+    word-break: break-all;
+    font-size: clamp(0.2rem, 4vw, 2rem);
+    
+    padding-left: 0.5rem;   
+    padding-right: 0.5rem;
+    
+}
