@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIM GAME</title>
+    <link rel="stylesheet" href="dist/styles.css">
+</head>
+
+<body class="u-border-2px u-radius-8">
+
+    <form>
+        <div>
+            <label for="playerOneNameInput">Player One:</label>
+            <input id="playerOneNameInput" name="name" type="text" required />
+        </div>
+        <div>
+            <label for="playerTwoNameInput">Player Two:</label>
+            <input id="playerTwoNameInput" name="name" type="text" required />
+            <button id="pcPlayer">Computer</button>
+        </div>
+        <div>
+            <label for="boardSizeInput">Board Size:</label>
+            <input id="boardSizeInput" name="size" type="number" required min="2" max="10"/>
+        </div>
+        <button id="applyButton" type="button" class="u-buttonStyle u-radius-8">Apply</button>
+    </form>
+
+    <article>
+        <button id="nextMove" class="u-buttonStyle u-radius-8">Next Move</button>
+        <button id="newGame" class="u-buttonStyle u-radius-8">New Game</button>
+    </article>
+    
+
+    <article class="" id = "scoreboard">
+        <p>
+            <span id="playerOneName">Player ONE</span>
+            <span> : </span>
+            <span id="playerOneScore">0</span>
+        </p>
+        <p>
+            <span id="playerTwoName">Player TWO</span>
+            <span> : </span>
+            <span id="playerTwoScore">0</span>
+        </p>
+    </article>
+
+    <div class="game-block">
+        <article id="gameBoard" class="u-radius-8 u-border-2px"></article>
+        <ul id="highScore" class="u-radius-8 u-border-2px"></ul>
+    </div>
+    
+
+    
+    <script type="module">
+        import {resetBoard, removeMatch, debug, setPlayer,
+                 keepScore, updateBoard, isOver, 
+                 getNimSum, findWinningMove, updateScoreBoard} from "./dist/nim.js"
+        console.log("HELLO!");
+
+        //INPUTS
+        const playerOneInput = document.getElementById("playerOneNameInput");
+        const playerTwoInput = document.getElementById("playerTwoNameInput");
+        const boardSizeInput = document.getElementById("boardSizeInput");
+        
+        //MODULES
+        const gameBoard = document.getElementById("gameBoard");
+        const highScoreTable = document.getElementById("highScore");
+
+        //BUTTONS
+        const applyButton = document.getElementById("applyButton");   
+        const nextMoveButton = document.getElementById("nextMove");
+        const newGameButton = document.getElementById("newGame");
+        const pcPlayerButton = document.getElementById("pcPlayer");
+
+        //OUTPUTS
+        const playerOneNameDisplay = document.getElementById("playerOneName");
+        const playerTwoNameDisplay = document.getElementById("playerTwoName");
+        const playerOneScoreDisplay = document.getElementById("playerOneScore");
+        const playerTwoScoreDisplay = document.getElementById("playerTwoScore");
+        let playerOne = setPlayer("Player ONE");
+        let playerTwo = setPlayer("Player TWO");
+
+        let boardSize = 3;
+        resetBoard(boardSize);                                 
+        updateBoard(gameBoard);
+        updateScoreBoard(highScoreTable);
+        boardSizeInput.value = boardSize;
+
+        let inMove = false;
+        let gameRow = -1;
+        let activePlayer = playerOne;
+        let playerTwoName = "";
+
+        playerOneNameDisplay.className = "u-currentPlayer";
+        playerTwoNameDisplay.className = "u-waitingPlayer";
+
+        pcPlayerButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            playerTwo = setPlayer("Computer");
+            playerTwoNameDisplay.innerText = playerTwo.name;
+            playerTwoScoreDisplay.innerText = playerTwo.score;
+        });
+
+        function victoryRoutine(){
+           
+            activePlayer.score += 1;
+            keepScore(playerOne,playerTwo);
+            playerOneScoreDisplay.innerText = playerOne.score;
+            playerTwoScoreDisplay.innerText = playerTwo.score;
+            console.log(`${activePlayer.name} won!`)
+            alert(`${activePlayer.name} WON!`);
+             
+        }
+        
+        applyButton.addEventListener("click", function (e) {
+            // e.preventDefault();
+
+            const playerOneName = playerOneInput.value; 
+            console.log(`player one input name = ${playerOneName}`);
+            playerTwoName = playerTwoInput.value;
+            console.log(`player two input name = ${playerTwoName}`);
+            boardSize = parseInt(boardSizeInput.value, 10);
+            
+            if (playerOneName !== "") {
+                playerOne = setPlayer(playerOneName);
+                playerOneNameDisplay.innerText = playerOne.name;
+                playerOneScoreDisplay.innerText = playerOne.score;                    
+            }            
+            if (playerTwoName !== "") {
+                playerTwo = setPlayer(playerTwoName);
+                playerTwoNameDisplay.innerText = playerTwo.name;
+                playerTwoScoreDisplay.innerText = playerTwo.score;
+            }  
+
+            if (boardSize > 1) {
+                gameBoard.innerHTML = ""; 
+                resetBoard(boardSize);                                  
+                updateBoard(gameBoard); 
+            }
+
+            console.log(`player one name = ${playerOne.name}`);
+            console.log(`player two name = ${playerTwo.name}`);
+                       
+            // keepScore(playerOne,playerTwo);
+            debug();                      
+                                    
+        });
+
+        newGameButton.addEventListener("click", function(e) {
+            gameBoard.innerHTML = "";
+            highScoreTable.innerHTML = "";
+            resetBoard(boardSize);                                 
+            updateBoard(gameBoard);
+            updateScoreBoard(highScoreTable);
+
+            inMove = false;
+            gameRow = -1;
+            activePlayer = playerOne;
+
+            playerOneNameDisplay.className = "u-currentPlayer";
+            playerTwoNameDisplay.className = "u-waitingPlayer";
+        });
+
+        nextMoveButton.addEventListener("click", function (e) {
+
+            if (inMove) {
+                inMove = false;
+                if (activePlayer === playerOne){
+                    activePlayer = playerTwo;
+                    playerTwoNameDisplay.className = "u-currentPlayer";
+                    playerOneNameDisplay.className = "u-waitingPlayer";
+                } else{
+                    activePlayer = playerOne;
+                    playerTwoNameDisplay.className = "u-waitingPlayer";
+                    playerOneNameDisplay.className = "u-currentPlayer";
+                }
+            } else {
+                alert("You have to remove at least ONE match");
+            }
+
+            //Computer play:
+            if (activePlayer.name === "Computer") {
+                const nimSum = getNimSum();
+                console.log (`NIM sum is: ${nimSum}.`);
+                if (nimSum != 0){
+                    const move = findWinningMove(nimSum);
+                    console.log(`The move is to remove ${move.matchesToRemove} from row ${move.rowIndex+1}.`);
+                    alert(`I'm removing ${move.matchesToRemove} from row ${move.rowIndex+1}`);
+                    if (move.matchesToRemove != -1) {
+                        for (let i = 0; i < move.matchesToRemove; i++){                            
+                            removeMatch(move.rowIndex + 1);
+                            gameBoard.innerHTML = ""; 
+                            updateBoard(gameBoard);                            
+                            if (isOver()){
+                                victoryRoutine();
+                            }
+                        }
+                    } else{
+                        alert(`I'm removing one match from row ${move.rowIndex + 1}.`);
+                        removeMatch(move.rowIndex + 1);
+                        gameBoard.innerHTML = ""; 
+                        updateBoard(gameBoard);                        
+                        if (isOver()){
+                                victoryRoutine();
+                        }
+                    }                      
+                }               
+                //return to HUMAN
+                activePlayer = playerOne;
+                playerTwoNameDisplay.className = "u-waitingPlayer";
+                playerOneNameDisplay.className = "u-currentPlayer";
+            }
+            
+        });
+
+        gameBoard.addEventListener("click", function (e) {
+            const lineID = Number(e.target.id)+1;
+            console.log (`current payer is ${activePlayer.name}`);
+            
+            if (!inMove) {   
+                gameRow = lineID;             
+                inMove = true;
+            } 
+            if (lineID === gameRow){
+                removeMatch(lineID);
+                console.log(lineID);
+                debug(); 
+                gameBoard.innerHTML = ""; 
+                updateBoard(gameBoard);
+                if (isOver()){
+                    victoryRoutine();                  
+                }                
+            } else {
+                alert("You can remove from the SAME row only during your move!");
+            }
+            // updateBoard(gameBoard);
+        });
+        
+    </script>
+</body>
+
+</html>
