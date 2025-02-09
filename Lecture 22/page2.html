@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="dist/styles.css">
+</head>
+
+<body>
+    <main class="u-stack">
+        <form class="u-stack" name="userInfo">
+            <div class="form-input">
+                <label for="Occupation">Occupation:</label>
+                <input id="occupationInput" name="Occupation" type="text" required autofocus
+                placeholder="Therapist">
+            </div>           
+            <div class="form-input">
+                <label for="income">Income:</label>
+                <input id="income" name="income" type="number" required>
+            </div>                       
+            <div class="u-cluster u-center">
+                <button>Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+
+        <script type="module">
+            console.log(`Hello`);
+
+            document.forms.namedItem("userInfo").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                let storedData = JSON.parse(localStorage.getItem("userFormData")) || {};
+
+                const formInput = new FormData(e.target);
+                console.log([...formInput.entries()]); 
+
+                const formData = Object.fromEntries(formInput.entries()); 
+                console.log(formData);
+                console.log(`Original stored data was: `,storedData);
+                storedData = {...storedData,...formData};
+                console.log(`Now stored data is: `,storedData);
+                
+
+                console.log(`income is: ${formData.income}`);
+                localStorage.setItem("userFormData", JSON.stringify(storedData));
+              
+            });
+        </script>
+
+    </main>
+
+</body>

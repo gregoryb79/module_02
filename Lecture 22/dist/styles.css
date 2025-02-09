@@ -1,0 +1,59 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  font-size: calc(1rem + 0.5vw);
+  line-height: 1.5;
+}
+
+body {
+  font-family: system-ui;
+}
+
+main {
+  width: min(40ch, 100% - 2rem);
+  margin-inline: auto;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  resize: none;
+}
+
+.u-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.u-center {
+  display: flex;
+  justify-content: center;
+}
+
+.form-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.u-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

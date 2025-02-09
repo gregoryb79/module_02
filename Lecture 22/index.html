@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="dist/styles.css">
+</head>
+
+<body>
+    <main class="u-stack">
+        <form class="u-stack" name="userInfo">
+            <div class="form-input">
+                <label for="nameInput">Name:</label>
+                <input id="nameInput" name="Name" type="text" required autofocus
+                placeholder="John Smith">
+            </div>           
+            <div class="form-input">
+                <label for="telInput">Phone Number:</label>
+                <input id="telInput" name="PhoneNumber" type="tel" required>
+            </div>
+            <div class="form-input">
+                <label for="emailInput">e-mail:</label>
+                <input id="emailInput" name="email" type="email" required
+                placeholder="name@mail.com">
+            </div>
+            <div class="form-input">
+                <label for="passwordInput">Password:</label>
+                <input id="passwordInput" name="password" type="password" required>
+            </div>
+            <div class="form-input">
+                <label for="repeatPasswordInput">Repeat Password:</label>
+                <input id="repeatPasswordInput" name="repeatPassword" type="password" required>
+            </div>
+            <div class="u-cluster u-center">
+                <button>Next</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+
+        <script type="module">
+            console.log(`Hello`);
+
+            document.forms.namedItem("userInfo").addEventListener("submit", function (e) {
+                e.preventDefault();
+    
+                const formInput = new FormData(e.target); // Get form data
+                console.log([...formInput.entries()]); 
+
+                const formData = Object.fromEntries(formInput.entries()); // Convert to object
+                console.log(formData);
+
+                console.log(`e-mail is: ${formData.email}`);
+                localStorage.setItem("userFormData", JSON.stringify(formData));
+
+                window.location.href = "page2.html"
+              
+            });
+        </script>
+
+    </main>
+
+</body>
