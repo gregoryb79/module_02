@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+    <link rel="stylesheet" href="dist/styles.css" />
+</head>
+<body>
+    <main class="stack">
+        <h1>My Todo List</h1>
+        <form name="add todo">
+            <input type="text" name="content" required autofocus />
+            <button>➕ Add</button>
+        </form>
+        <ul id="todos"></ul>
+    </main>
+    <script type="module">
+        import { init } from "./dist/view.js";
+
+        init(
+            document.forms.namedItem("add todo"),
+            document.getElementById("todos"),
+        );
+    </script>
+</body>
+</html>
