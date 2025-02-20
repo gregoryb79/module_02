@@ -1,0 +1,8 @@
+* persist to local storage
+* remove completed todos
+* filter todos by status
+* when the list is empty - show "No todos yet" message
+* login and register
+    1. prevent annonymous users from viewing the list
+    2. each user has its own list
+* display toast on errors

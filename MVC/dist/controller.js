@@ -1,4 +1,4 @@
-import { addTodo } from "./model.js";
+import { addTodo, toggleTodo } from "./model.js";
 export function onAddTodoSubmit(formData) {
     const rawContent = formData.get("content");
     if (typeof rawContent !== "string") {
@@ -15,3 +15,4 @@ export function onAddTodoSubmit(formData) {
         content,
     });
 }
+export const onToggleTodo = toggleTodo;

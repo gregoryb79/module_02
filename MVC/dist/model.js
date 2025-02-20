@@ -9,9 +9,19 @@ export function addTodo(todo) {
         throw new Error(`Todo with id ${todo.id} already exists`);
     }
     todos.push(todo);
-    onTodosUpdateCallbacks.forEach((callback) => callback());
+    callOnTodosUpdateCallbacks();
 }
-export function toggleTodo(todoId) { }
+export function toggleTodo(todoId) {
+    const todo = todos.find((t) => t.id === todoId);
+    if (!todo) {
+        throw new Error(`Todo with id ${todoId} not found`);
+    }
+    todo.status = todo.status === "Completed" ? "Pending" : "Completed";
+    callOnTodosUpdateCallbacks();
+}
 export function onTodosUpdate(callback) {
     onTodosUpdateCallbacks.push(callback);
+}
+function callOnTodosUpdateCallbacks() {
+    onTodosUpdateCallbacks.forEach((callback) => callback());
 }

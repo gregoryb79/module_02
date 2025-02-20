@@ -1,4 +1,4 @@
-import { onAddTodoSubmit } from "./controller.js";
+import { onAddTodoSubmit, onToggleTodo } from "./controller.js";
 import { getTodos, onTodosUpdate } from "./model.js";
 
 export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement) {
@@ -15,12 +15,18 @@ export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement) {
         }
     });
 
-    todoList.addEventListener("click",function(event){
-        if (event.target.tagName === "LI") {
-            const clicked = event.target;
-            console.log(clicked);
-            // console.log("Task ID:", event.target.dataset.id); // Get the data-id attribute
-          }
+    todoList.addEventListener("click", function (e) {
+        const todoId = (e.target as HTMLElement).dataset.id;
+
+        if (!todoId) {
+            return;
+        }
+
+        try {
+            onToggleTodo(todoId);
+        } catch (error) {
+            console.error(error);
+        }
     });
 
     onTodosUpdate(renderTodos);
@@ -34,6 +40,7 @@ export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement) {
             const li = document.createElement("li");
 
             li.textContent = todo.content;
+            li.dataset.id = todo.id;
             
             if (todo.status === "Completed") {
                 li.classList.add("completed");

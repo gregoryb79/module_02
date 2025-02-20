@@ -19,11 +19,24 @@ export function addTodo(todo: Todo) {
     }
 
     todos.push(todo);
-    onTodosUpdateCallbacks.forEach((callback) => callback());
+    callOnTodosUpdateCallbacks();
 }
 
-export function toggleTodo(todoId: string) {}
+export function toggleTodo(todoId: string) {
+    const todo = todos.find((t) => t.id === todoId);
+
+    if (!todo) {
+        throw new Error(`Todo with id ${todoId} not found`);
+    }
+
+    todo.status = todo.status === "Completed" ? "Pending" : "Completed";
+    callOnTodosUpdateCallbacks();
+}
 
 export function onTodosUpdate(callback: () => void) {
     onTodosUpdateCallbacks.push(callback);
+}
+
+function callOnTodosUpdateCallbacks() {
+    onTodosUpdateCallbacks.forEach((callback) => callback());
 }
