@@ -6,13 +6,29 @@
     <title>TODO</title>
     <link rel="stylesheet" href="dist/styles.css" />
 </head>
-<body>
+<body>    
     <main class="stack">
-        <h1>My Todo List</h1>
+        <h1>My Todo List</h1>        
         <form name="add todo">
             <input type="text" name="content" required autofocus />
             <button>➕ Add</button>
         </form>
+        <menu class="horisontalMenu">
+            <li>
+                <button id="sortAndDisplay" class="button">
+                    Hide Completed
+                    <!-- Hide Pending -->
+                    <!-- Pending On Top -->
+                    <!-- Completed On Top -->
+                </button>
+            </li>            
+            <li>
+                <button id="deleteCompleted" class="button">
+                    Delete Completed
+                </button>
+            </li>
+
+        </menu>
         <ul id="todos"></ul>
     </main>
     <script type="module">
@@ -21,6 +37,8 @@
         init(
             document.forms.namedItem("add todo"),
             document.getElementById("todos"),
+            document.getElementById("sortAndDisplay"),
+            document.getElementById("deleteCompleted")
         );
     </script>
 </body>

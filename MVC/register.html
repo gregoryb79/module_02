@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO - REGISTER</title>
+    <link rel="stylesheet" href="dist/styles.css" />
+</head>
+
+<body>
+    <h2 class="u-center">
+        Please Choose Username and Password
+    </h2>
+    <form name="register" class="registerForm">
+        <li>
+            <label for="username">Username:</label>
+            <input name="username" type="text" id="username" class="u-inputFieldShort" required>
+        </li>
+        <li>
+            <label for="password">Password:</label>
+            <input name="password" type="text" id="password" class="u-inputFieldShort" required>
+        </li>    
+        <li>
+            <label for="repeatPassword">Repeat Password:</label>
+            <input name="repeatPassword" type="text" id="repeatPassword" class="u-inputFieldShort" required>
+        </li>            
+        <button id="register" class="button">Register</button>
+    </form>
+    <p class="u-center u-smallFont">
+        Don't have a User?
+        <a href="./register.html">Sign Up</a>
+    </p>
+
+    <script type="module">
+        import { register } from "./dist/view.js";
+
+        register(
+            document.forms.namedItem("register")          
+        );
+    </script>
+    
+</body>

@@ -25,7 +25,7 @@ input, button {
     font-family: inherit;
 }
 
-ul {
+ul, li{
     list-style: none;
     padding: 0;
 }
@@ -40,12 +40,66 @@ h1 {
     gap: 1rem;
 }
 
+
+.u-inputFieldShort{
+    width: 10rem;
+}
+.u-center{
+    text-align: center;
+}
+
+.u-smallFont{
+    font-size: 0.8rem;
+}
+
 form[name="add todo"] {
     display: flex;
     gap: 0.5rem;
 
     > input {
         flex: 1;
+    }
+}
+
+.horisontalMenu{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 13rem;
+}
+
+.button{
+    width: 10rem;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    li{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 15rem;    
+    }    
+}
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+
+    li{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 15rem;            
+    }    
+    :nth-child(3){
+        width: 18rem;
     }
 }
 

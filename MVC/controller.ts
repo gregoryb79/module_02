@@ -1,4 +1,4 @@
-import { addTodo, toggleTodo } from "./model.js";
+import { addTodo, toggleTodo, addUser} from "./model.js";
 
 export function onAddTodoSubmit(formData: FormData) {
     const rawContent = formData.get("content");
@@ -19,6 +19,42 @@ export function onAddTodoSubmit(formData: FormData) {
         status: "Pending",
         content,
     });
+}
+
+export function onRegisterFormSubmit(formData: FormData){
+    const rawUsername = formData.get("username"); 
+    if (typeof rawUsername !== "string") {
+        throw new Error("Username must be a string");
+    }   
+   
+    const password = formData.get("password");
+    if (typeof password !== "string") {
+        throw new Error("Password must be a string");
+    } 
+    console.log(password);
+    const repeatPassword = formData.get("repeatPassword");
+    if (typeof repeatPassword !== "string") {
+        throw new Error("Repeat password must be a string");
+    } 
+
+    console.log(repeatPassword);
+    const username = rawUsername.trim(); 
+    console.log(`username: <${username}>`);   
+    if (!username) {
+        throw new Error("Username can't be empty");
+    }
+    if (!password) {
+        throw new Error("Password can't be empty");
+    }
+    if (!repeatPassword) {
+        throw new Error("Repeat can't be empty");
+    }
+    if (password != repeatPassword){
+        throw new Error("Passwords don't match.");
+    }
+
+    addUser(username,password);
+
 }
 
 export const onToggleTodo = toggleTodo;

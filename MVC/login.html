@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO - LOGIN</title>
+    <link rel="stylesheet" href="dist/styles.css" />
+</head>
+
+<body>
+    <h2 class="u-center">
+        Please Log In
+    </h2>
+    <form name="login" class="loginForm">
+        <li>
+            <label for="username">Username:</label>
+            <input name="username" type="text" id="username" class="u-inputFieldShort">
+        </li>
+        <li>
+            <label for="password">Password:</label>
+            <input  name="password" type="text" id="password" class="u-inputFieldShort">
+        </li>               
+        <button id="logInButton" class="button">Log In</button>
+    </form>
+    <p class="u-center u-smallFont">
+        Don't have a User?
+        <a href="./register.html">Sign Up</a>
+    </p>
+
+    <script type="module">
+        import { login } from "./dist/view.js";
+
+        login(
+            document.forms.namedItem("login")            
+        );
+    </script>
+    
+</body>
