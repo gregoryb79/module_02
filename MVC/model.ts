@@ -16,7 +16,8 @@ const storedUsers = JSON.parse(localStorage.getItem(usersStorageKey) || "[]"); /
 const users = new Map<string,string>(Array.isArray(storedUsers) ? storedUsers : []) // Ensure it's a valid Map
 // const users = new Map<string,string>(JSON.parse(localStorage.getItem(usersStorageKey))) ?? new Map<string,string>();
 
-let todosStorageKey = "todos";
+const currentUser = sessionStorage.getItem(currentUserStorageKey) ?? "";
+let todosStorageKey = `${currentUser}_todos`;
 let todos: Todo[] = JSON.parse(localStorage.getItem(todosStorageKey) ?? "[]")
 .map((exp: any) => ({ ...exp, createdAt: new Date(exp.createdAt) }));
 
