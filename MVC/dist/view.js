@@ -1,5 +1,14 @@
-import { onAddTodoSubmit, onToggleTodo, onRegisterFormSubmit } from "./controller.js";
-import { getTodos, onTodosUpdate, pedningFirst, completedFirst, newestFirst, deleteCompletedTasks } from "./model.js";
+import { onAddTodoSubmit, onToggleTodo, onRegisterFormSubmit, onLoginFormSubmit } from "./controller.js";
+import { getTodos, onTodosUpdate, pedningFirst, completedFirst, newestFirst, deleteCompletedTasks, getCurrentUser } from "./model.js";
+export function checkUser(title) {
+    const currentUser = getCurrentUser();
+    if (currentUser === "") {
+        window.location.href = "./login.html";
+    }
+    else {
+        title.textContent = `${currentUser}'s ToDo List`;
+    }
+}
 export function init(addTodoForm, todoList, sortAndDisplay, deleteCompleted) {
     addTodoForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -117,9 +126,27 @@ export function register(registerForm) {
         try {
             onRegisterFormSubmit(formData);
             registerForm.reset();
+            window.location.href = "./login.html";
         }
         catch (error) {
             console.error(error);
+        }
+    });
+}
+export function login(loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let isLoginSucsessful = false;
+        const formData = new FormData(loginForm, e.submitter);
+        try {
+            isLoginSucsessful = onLoginFormSubmit(formData);
+            loginForm.reset();
+        }
+        catch (error) {
+            console.error(error);
+        }
+        if (isLoginSucsessful) {
+            window.location.href = "./index.html";
         }
     });
 }

@@ -8,7 +8,7 @@
 </head>
 <body>    
     <main class="stack">
-        <h1>My Todo List</h1>        
+        <h1 id="title">My Todo List</h1>        
         <form name="add todo">
             <input type="text" name="content" required autofocus />
             <button>➕ Add</button>
@@ -32,7 +32,9 @@
         <ul id="todos"></ul>
     </main>
     <script type="module">
-        import { init } from "./dist/view.js";
+        import { init, checkUser } from "./dist/view.js";
+
+        checkUser(document.getElementById("title"));
 
         init(
             document.forms.namedItem("add todo"),

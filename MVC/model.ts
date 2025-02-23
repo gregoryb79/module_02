@@ -11,6 +11,7 @@ type Todo = {
 // return storedData ? new Map<K, V>(JSON.parse(storedData)) : new Map<K, V>();
 
 const usersStorageKey = "users";
+const currentUserStorageKey = "currUser";
 const storedUsers = JSON.parse(localStorage.getItem(usersStorageKey) || "[]"); // Ensure it's at least an empty array
 const users = new Map<string,string>(Array.isArray(storedUsers) ? storedUsers : []) // Ensure it's a valid Map
 // const users = new Map<string,string>(JSON.parse(localStorage.getItem(usersStorageKey))) ?? new Map<string,string>();
@@ -32,9 +33,17 @@ export function getPassword(username : string) : string {
     } 
 }
 
-function checkPassword(username:string, password : string) : boolean{
-    return (users.get(username)===password);
+export function setCurrentUser(username: string){
+    sessionStorage.setItem(currentUserStorageKey,username);
 }
+
+export function getCurrentUser():string {
+    return sessionStorage.getItem(currentUserStorageKey) ?? "";
+}
+
+// function checkPassword(username:string, password : string) : boolean{
+//     return (users.get(username)===password);
+// }
 
 export function addUser(username:string, password : string){
     if (users.has(username)){

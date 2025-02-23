@@ -1,4 +1,4 @@
-import { addTodo, toggleTodo, addUser} from "./model.js";
+import { addTodo, toggleTodo, addUser, getPassword setCurrentUser} from "./model.js";
 
 export function onAddTodoSubmit(formData: FormData) {
     const rawContent = formData.get("content");
@@ -54,6 +54,39 @@ export function onRegisterFormSubmit(formData: FormData){
     }
 
     addUser(username,password);
+
+}
+
+export function onLoginFormSubmit(formData: FormData) : boolean{
+    const username = formData.get("username"); 
+    if (typeof username !== "string") {
+        throw new Error("Username must be a string");
+    }   
+   
+    const password = formData.get("password");
+    if (typeof password !== "string") {
+        throw new Error("Password must be a string");
+    } 
+    console.log(password);    
+
+    console.log(`username: <${username}>`); 
+    if (!username) {
+        throw new Error("Username can't be empty");
+    }
+    if (!password) {
+        throw new Error("Password can't be empty");
+    }
+  
+    const savedPassword = getPassword(username);
+    if (password === savedPassword){
+        setCurrentUser(username);
+        return true;
+    }
+    if (savedPassword === ""){
+        throw new Error("No such username");
+    }
+
+    return false;
 
 }
 

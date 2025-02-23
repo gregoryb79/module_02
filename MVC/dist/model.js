@@ -1,6 +1,7 @@
 // const storedData = localStorage.getItem(key);
 // return storedData ? new Map<K, V>(JSON.parse(storedData)) : new Map<K, V>();
 const usersStorageKey = "users";
+const currentUserStorageKey = "currUser";
 const storedUsers = JSON.parse(localStorage.getItem(usersStorageKey) || "[]"); // Ensure it's at least an empty array
 const users = new Map(Array.isArray(storedUsers) ? storedUsers : []); // Ensure it's a valid Map
 // const users = new Map<string,string>(JSON.parse(localStorage.getItem(usersStorageKey))) ?? new Map<string,string>();
@@ -18,9 +19,15 @@ export function getPassword(username) {
         return "";
     }
 }
-function checkPassword(username, password) {
-    return (users.get(username) === password);
+export function setCurrentUser(username) {
+    sessionStorage.setItem(currentUserStorageKey, username);
 }
+export function getCurrentUser() {
+    return sessionStorage.getItem(currentUserStorageKey) ?? "";
+}
+// function checkPassword(username:string, password : string) : boolean{
+//     return (users.get(username)===password);
+// }
 export function addUser(username, password) {
     if (users.has(username)) {
         throw new Error(`User with Username: ${username} already exists`);
