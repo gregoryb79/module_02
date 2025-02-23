@@ -64,13 +64,15 @@ export function onLoginFormSubmit(formData) {
         throw new Error("Password can't be empty");
     }
     const savedPassword = getPassword(username);
+    if (savedPassword === "") {
+        throw new Error("No such username");
+    }
     if (password === savedPassword) {
         setCurrentUser(username);
         return true;
     }
-    if (savedPassword === "") {
-        throw new Error("No such username");
+    else {
+        throw new Error("username and password dont match");
     }
-    return false;
 }
 export const onToggleTodo = toggleTodo;

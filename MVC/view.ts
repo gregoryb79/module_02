@@ -24,6 +24,7 @@ export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement,
             addTodoForm.reset();
         } catch (error) {
             console.error(error);
+            displayToast(error);
         }
     });
 
@@ -38,6 +39,7 @@ export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement,
             onToggleTodo(todoId);
         } catch (error) {
             console.error(error);
+            displayToast(addTodoForm,error);
         }
     });
 
@@ -140,7 +142,20 @@ export function init(addTodoForm: HTMLFormElement, todoList: HTMLUListElement,
 
             todoList.append(li);
         }
-    }
+    }   
+}
+
+function displayToast(container: HTMLElement, message: string){
+           
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = message;
+    
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000); // Auto-hide after 3s
 }
 
 export function register(registerForm: HTMLFormElement){
@@ -156,6 +171,7 @@ export function register(registerForm: HTMLFormElement){
              window.location.href = "./login.html"
         } catch (error) {
             console.error(error);
+            displayToast(registerForm, error);
         }
     });
 
@@ -174,7 +190,9 @@ export function login(loginForm: HTMLFormElement){
             loginForm.reset();
         } catch (error) {
             console.error(error);
-        }
+            console.log("show toast");
+            displayToast(loginForm, error);
+        } 
 
         if (isLoginSucsessful) {
             window.location.href = "./index.html" 

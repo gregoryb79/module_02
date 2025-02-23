@@ -77,16 +77,16 @@ export function onLoginFormSubmit(formData: FormData) : boolean{
         throw new Error("Password can't be empty");
     }
   
-    const savedPassword = getPassword(username);
-    if (password === savedPassword){
-        setCurrentUser(username);
-        return true;
-    }
+    const savedPassword = getPassword(username);    
     if (savedPassword === ""){
         throw new Error("No such username");
     }
-
-    return false;
+    if (password === savedPassword){
+        setCurrentUser(username);
+        return true;
+    } else {
+        throw new Error("username and password dont match");        
+    }      
 
 }
 

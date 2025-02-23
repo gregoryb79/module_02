@@ -19,6 +19,7 @@ export function init(addTodoForm, todoList, sortAndDisplay, deleteCompleted) {
         }
         catch (error) {
             console.error(error);
+            displayToast(error);
         }
     });
     todoList.addEventListener("click", function (e) {
@@ -31,6 +32,7 @@ export function init(addTodoForm, todoList, sortAndDisplay, deleteCompleted) {
         }
         catch (error) {
             console.error(error);
+            displayToast(addTodoForm, error);
         }
     });
     let showCompleted = true;
@@ -119,6 +121,15 @@ export function init(addTodoForm, todoList, sortAndDisplay, deleteCompleted) {
         }
     }
 }
+function displayToast(container, message) {
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.remove();
+    }, 3000); // Auto-hide after 3s
+}
 export function register(registerForm) {
     registerForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -130,6 +141,7 @@ export function register(registerForm) {
         }
         catch (error) {
             console.error(error);
+            displayToast(registerForm, error);
         }
     });
 }
@@ -144,6 +156,8 @@ export function login(loginForm) {
         }
         catch (error) {
             console.error(error);
+            console.log("show toast");
+            displayToast(loginForm, error);
         }
         if (isLoginSucsessful) {
             window.location.href = "./index.html";
